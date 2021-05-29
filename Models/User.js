@@ -3,25 +3,25 @@ const mongoose = require('mongoose');
 //using required field is giving error ;_;
 const UserSchema = new mongoose.Schema({
     name: {
-        Type: String,
-        //required: true
+        type: String,
+        required: true
     },
     email: {
-        Type: String,
-        //required: true,
-        //unique: true
+        type: String,
+        required: true,
+        unique: true
 
     },
     password: {
         type: String,
-        //required: true
+        required: true
     },
     avatar: {
-        Type: String,
+        type: String,
     },
     date: {
-        Type: Date,
-        //default: Date.now
+        type: Date,
+        default: Date.now
     }
 });
 
