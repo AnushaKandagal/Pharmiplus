@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
  const Landing = () => {
     return (
@@ -10,8 +11,8 @@ import React from 'react'
           Forgot to buy medicines? than PharmiPlus should be your ultimate health partner.
           </p>
           <div class="buttons">
-            <a href="register.html" class="btn btn-primary">Sign Up</a>
-            <a href="login.html" class="btn btn-light">Login</a>
+            <Link to='/register' class="btn btn-primary">Sign Up</Link>
+            <Link to='/login' class="btn btn-light">Login</Link>
           </div>
         </div>
       </div>

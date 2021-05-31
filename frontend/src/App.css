@@ -40,8 +40,8 @@ img {
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin-top: 6rem;
-  margin-bottom: 3rem;
+  margin-top: 20rem;
+  margin-bottom: 20rem;
 }
 
 /* Text Styles*/
@@ -303,7 +303,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 2rem;
+  padding: 0.7rem 1rem;
   position: fixed;
   z-index: 1;
   width: 100%;
