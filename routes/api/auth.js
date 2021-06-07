@@ -1,14 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-//const config = require('config');
+const config = require('config');
 const { check, validationResult } = require('express-validator');
+const auth = require('../../middleware/auth');
+const jwt = require('jsonwebtoken');
+const gravatar = require('gravatar');
 
 //@router GET api/auth
-//@router TEST route
-//@router Public (no token or authenciated is needed to reach this router)
+//@router protected route
 
-router.get('/',(req,res)=>res.send('auth route working...'));
+
+router.get('/', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@router POST api/auth
+//@router authenticate user and get token
+// public route
 
 router.post(
     '/',
@@ -30,18 +45,34 @@ router.post(
             .status(400)
             .json({ errors: [{ msg: 'Invalid Credentials' }] });
         }
-  
+
         const isMatch = await bcrypt.compare(password, user.password);
-  
+         
         if (!isMatch) {
           return res
             .status(400)
             .json({ errors: [{ msg: 'Invalid Credentials' }] });
         }
-        else {
-            console.log('user logged it');
-           return res.send('Logged in');
-        }
+       
+        const payload = {
+          user: {
+            id: user.id
+          }
+        };
+
+        jwt.sign(
+          payload,
+          config.get('jwtSecret'),
+          { expiresIn: '500 days' },
+          (err, token) => {
+            if (err) throw err;
+            res.json({ token });
+          }
+        );
+  
+       
+  
+        
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

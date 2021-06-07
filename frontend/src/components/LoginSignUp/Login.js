@@ -1,7 +1,10 @@
 import React , {Fragment , useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {loginAction} from '../../Actions/auth';
 
-const Login = () => {
+const Login = ({loginAction, isAuhenticated}) => {
     const [formData, setFormData] = useState({
       email: '',
       password: '',
@@ -14,8 +17,13 @@ const Login = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log('SUCESSS')
+        loginAction(email,password)
       };
+
+      //if user successfully logged then redirect to required component
+    if (isAuhenticated){
+       return <Redirect to ='/Products'/>
+    }
 
     return (
         <Fragment>
@@ -52,4 +60,15 @@ const Login = () => {
     )
 }
 
-export default Login
+
+Login.propTypes={
+  loginAction:PropTypes.func.isRequired,
+  isAuhenticated:PropTypes.bool
+}
+
+const mapSateToProps= state=>({
+  isAuhenticated: state.auth.isAuhenticated
+})
+
+
+export default connect(mapSateToProps,{loginAction})(Login)
