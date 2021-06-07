@@ -1,5 +1,6 @@
 import React , {Fragment , useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from "axios"
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -19,16 +20,32 @@ const Register = () => {
         if (password !== password2) {
           //setAlert('Passwords do not match', 'danger');
           alert('Passwords do not match')
-        } else {
-          //register({ name, email, password });
-          console.log(formData)
+        } 
+        else {
+
+          
+            await axios.post('http://localhost:5000/api/users',  
+            JSON.stringify({
+               "name" : name,
+               "email" : email,
+               "password" : password
+               }))
+               .then(function (response) {
+                console.log(response);
+              })
+              .catch(err => {
+                console.error(err);
+              });
+         
         }
-      };
+          
+        }
+      
 
     return (
         <Fragment>
             <h1 className="large text-primary">Sign Up</h1>
-      <p className="lead"><i class="fas fa-user"></i> Create Your Account</p>
+      <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
       <form className="form"  onSubmit={e =>onSubmit(e)}>
         <div className="form-group">
           <input
