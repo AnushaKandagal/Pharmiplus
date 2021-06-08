@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 
 
-const Register = ({setAlert ,  registerAction, isAuhenticated}) => {
+const Register = ({setAlert ,  registerAction, isAuthenticated}) => {
     const [formData, setFormData] = useState({
       name: '',
       email: '',
@@ -32,7 +32,7 @@ const Register = ({setAlert ,  registerAction, isAuhenticated}) => {
       }
     };
 
-    if(isAuhenticated){
+    if(isAuthenticated){
       return <Redirect to='/Products'/>
     }
     
@@ -101,11 +101,11 @@ const Register = ({setAlert ,  registerAction, isAuhenticated}) => {
 Register.propTypes={
   setAlert: PropTypes.func.isRequired,
   registerAction: PropTypes.func.isRequired,
-  isAuhenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool
 };
 
 const mapSateToProps= state=>({
-  isAuhenticated: state.auth.isAuhenticated
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapSateToProps,{setAlert,registerAction})(Register);

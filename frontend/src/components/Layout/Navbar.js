@@ -7,7 +7,8 @@ import {logoutAction} from '../../Actions/auth';
 const Navbar =({auth:{isAuthenticated,loading},logoutAction}) =>{
   const authLinks = (
     <ul>
-       //add  link to products
+       <Link to="/Products">Products</Link> 
+
      
       <li>
         <a onClick={logoutAction} href="#!">
