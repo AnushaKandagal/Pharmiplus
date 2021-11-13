@@ -1,9 +1,9 @@
 # Pharmiplus
 Full stack web application using MERN ( mongoDB , express , react , nodejs )
 
-frontend - react and redux
-backend - nodejs
-database - mongoDB cloud database
+frontend - react and redux.
+backend - nodejs.
+database - mongoDB cloud database.
 Uses json web token for authentication and authorization.
 
 A web application that sells medicines online , similar to any ecommerce website
